@@ -1,0 +1,27 @@
+name: Compile Kernel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the source code
+        uses: actions/checkout@v4
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential gcc-aarch64-linux-gnu libncurses5-dev flex bison libssl-dev
+
+      - name: Build command goes here
+        run: |
+          echo "أوامر البناء الخاصة بك يتم وضعها هنا"
+
+      - name: Save the output file
+        uses: actions/upload-artifact@v4
+        with:
+          name: My-Custom-Kernel
+          path: arch/arm64/boot/Image.gz-dtb
+          
